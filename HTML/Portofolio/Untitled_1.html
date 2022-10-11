@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>animation coding</title>
+<style>
+* {
+border: 0;
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+}
+:root {
+--hue: 184;
+--bg: hsl(var(--hue), 10%, 90%);
+--fg: hsl(var(--hue), 66%, 24%);
+--primary: hsl(var(--hue), 66%, 44%);
+--gradient: linear-gradient(
+145deg,
+hsl(var(--hue), 10%, 85%),
+hsl(var(--hue), 10%, 100%)
+);
+font-size: 16px;
+}
+body,
+button {
+color: var(--fg);
+font: 1em/1.5 "Nunito", sans-serif;
+}
+body {
+background: var(--bg);
+height: 100vh;
+display: grid;
+place-items: center;
+padding: 1.5em 0 0 0;
+}
+body:after {
+content: "";
+display: block;
+height: 1.5em;
+width: 100%;
+}
+/* All */
+.app,
+.header,
+.main__date-nav,
+.main__stat-row,
+.main__stat-graph,
+.footer {
+display: flex;
+}
+.header,
+.main__date-nav,
+.footer {
+justify-content: space-between;
+}
+.header__profile-btn,
+.header__notes-btn,
+.main__date-arrow-btn,
+.main__date-edit-btn,
+.footer__nav-btn {
+background: transparent;
+display: flex;
+outline: transparent;
+transition: all 0.15s linear;
+-webkit-appearance: none;
+appearance: none;
+-webkit-tap-highlight-color: transparent;
+}
+.app {
+background: hsl(var(--hue), 10%, 85%);
+border-radius: 3em;
+flex-direction: column;
+padding: 2.25em;
+width: 390px;
+height: 844px;
+}
+.app__gradients {
+position: absolute;
+width: 1px;
+height: 1px;
+}
+.icon {
+display: block;
+margin: auto;
+width: 1.5em;
+height: 1.5em;
+}
+.icon circle,
+.icon path {
+fill: currentColor;
+transition: fill 0.15s linear;
+}
+.icon ellipse,
+.icon polygon {
+stroke: currentColor;
+transition: stroke 0.15s linear;
+}
+.icon .no-fill {
+fill: none;
+stroke: currentColor;
+}
+.icon--red path {
+fill: hsl(3, 90%, 55%);
+}
+.icon--pulse {
+animation: bpm 1s linear, pulse 0.75s 1s linear infinite;
+}
+.ring,
+.sr-only {
+position: absolute;
+}
+.ring {
+display: block;
+inset: 0;
+width: 100%;
+height: auto;
+}
+.ring-fill {
+stroke: url("#ring");
+}
+.ring-stroke {
+animation-duration: 1s;
+animation-timing-function: ease-in-out;
+stroke: url("#ring");
+}
+.ring-stroke--steps {
+animation-name: stepCount;
+}
+.ring-stroke--cals {
+animation-name: cals;
+}
+.ring-stroke--miles {
+animation-name: miles;
+}
+.ring-stroke--mins {
+animation-name: mins;
+}
+.ring-stroke--stepHrs {
+animation-name: stepHrs;
+}
+.ring-track {
+stroke: hsl(var(--hue), 10%, 80%);
+}
+.sr-only {
+clip: rect(1px, 1px, 1px, 1px);
+overflow: hidden;
+width: 1px;
+height: 1px;
+}
+/* Header */
+.header {
+display: flex;
+justify-content: space-between;
+margin-bottom: 1.5em;
+}
+.header__profile-btn,
+.header__notes-btn {
+width: 3em;
+height: 3em;
+}
+.header__profile-btn {
+border-radius: 1em;
+box-shadow: 0 0 0 0.125em inset;
+}
+.header__notes-btn {
+margin-right: -1em;
+}
+.header__profile-btn:active,
+.header__notes-btn:active {
+transform: scale(0.9);
+}
+.header__profile-btn:focus {
+box-shadow: 0 0 0 0.125em var(--primary) inset;
+}
+.header__profile-icon {
+border-radius: 0.5em;
+margin: auto;
+width: 2em;
+height: 2em;
+}
+.header__notes-btn:focus .icon path {
+fill: var(--primary);
+}
+/* Main */
+.main__date-nav {
+margin-bottom: 1.5em;
+}
+.main__date-arrow-btn,
+.main__date-edit-btn {
+height: 1.5em;
+}
+.main__date-arrow-btn {
+width: 1.5em;
+}
+.main__date-arrow-btn:active .icon path,
+.main__date-arrow-btn:focus .icon path {
+fill: var(--primary);
+}
+.main__date {
+text-transform: uppercase;
+}
+.main__date-edit-btn {
+min-width: 1.5em;
+}
+.main__date-edit-btn:active,
+.main__date-edit-btn:focus {
+color: var(--primary);
+}
+.main__stat-blocks {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+grid-gap: 1.5em;
+margin-bottom: 1.5em;
+}
+.main__stat-block {
+aspect-ratio: 1 / 1;
+background: var(--gradient);
+border-radius: 1.5em;
+box-shadow: -0.75em -0.75em 2.25em hsl(0, 0%, 100%),
+0.75em 0.75em 2.25em hsl(var(--hue), 5%, 65%);
+padding: 0.75em;
+text-align: center;
+width: 100%;
+}
+.main__stat-block--lg {
+aspect-ratio: 2 / 1;
+grid-column: 1 / 4;
+padding: 1.5em;
+}
+.main__stat-rows,
+.main__stat-row {
+margin-bottom: 1.5em;
+}
